@@ -5,7 +5,6 @@ export const Input = styled.input`
   outline: none;
   color: #fff;
   width: 100%;
-  background-color: inherit;
   padding: 0;
   font-family: "Inter";
   font-size: 18px;

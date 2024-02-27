@@ -1,4 +1,4 @@
-import { Input, InputContainer, InputLabel } from "@/components";
+import { Button, Input, InputContainer, InputLabel } from "@/components";
 
 import styles from "./SignUpForm.module.scss";
 export const SignUpForm = () => {
@@ -24,6 +24,8 @@ export const SignUpForm = () => {
         <InputLabel htmlFor="password">Password</InputLabel>
         <Input id="password" type="password" />
       </InputContainer>
+
+      <Button $primary>Create account</Button>
     </form>
   );
 };
