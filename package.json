@@ -7,10 +7,23 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
+    "lint:scss": "npx stylelint \"**/*.scss\"",
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "prepare": "husky",
+    "lint:staged": "lint-staged"
   },
   "resolutions": {
     "styled-components": "^5"
+  },
+  "lint-staged": {
+    "./src/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint:ts:fix"
+    ],
+    "./src/**/*.{css,scss}": [
+      "npm run lint:scss:fix"
+    ]
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -28,7 +41,10 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "lint-staged": "^15.2.2",
     "sass": "^1.71.1",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
   }
