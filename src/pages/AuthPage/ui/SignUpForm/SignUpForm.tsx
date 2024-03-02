@@ -1,31 +1,66 @@
-import { Button, Input, InputContainer, InputLabel } from "@/components";
-
+import { Controller, useForm } from "react-hook-form";
 import styles from "./SignUpForm.module.scss";
+import { Button, Flex, Input } from "@mantine/core";
+import { IconAt, IconPassword } from "@tabler/icons-react";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "@/shared/utils/validation";
+import { useLogInWithEmailAndPasswordMutation } from "@/shared/hooks";
+
+export interface FormValues {
+  email: string;
+  password: string;
+}
+
 export const SignUpForm = () => {
+  const { handleSubmit, control } = useForm<FormValues>({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const logInWithEmailAndPassword = useLogInWithEmailAndPasswordMutation();
+
   return (
-    <form className={styles.form}>
-      <InputContainer>
-        <InputLabel htmlFor="email">Email</InputLabel>
-        <Input id="email" type="email" />
-      </InputContainer>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(async ({ password, email }) =>
+        logInWithEmailAndPassword.mutate({ email, password })
+      )}
+    >
+      <Flex direction="column" gap="md" w="20rem">
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              data-testid="email"
+              onChange={onChange}
+              onBlur={onBlur}
+              value={value}
+              placeholder="Email"
+              leftSection={<IconAt />}
+            />
+          )}
+        />
 
-      <section className={styles.section}>
-        <InputContainer>
-          <InputLabel htmlFor="firstName">First name</InputLabel>
-          <Input id="firstName" type="text" />
-        </InputContainer>
-        <InputContainer>
-          <InputLabel htmlFor="lastName">Last name</InputLabel>
-          <Input id="lastName" type="text" />
-        </InputContainer>
-      </section>
-
-      <InputContainer>
-        <InputLabel htmlFor="password">Password</InputLabel>
-        <Input id="password" type="password" />
-      </InputContainer>
-
-      <Button $primary>Create account</Button>
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              data-testid="password"
+              onChange={onChange}
+              onBlur={onBlur}
+              value={value}
+              placeholder="Password"
+              leftSection={<IconPassword />}
+              autoComplete="current-password"
+            />
+          )}
+        />
+      </Flex>
+      <Button variant="default" type="submit">
+        Sign up
+      </Button>
     </form>
   );
 };
