@@ -1,5 +1,5 @@
-import React from "react";
+import styles from "./SignInForm.module.scss";
 
 export const SignInForm = () => {
-  return <div></div>;
+  return <div className={styles.sign}>sign</div>;
 };

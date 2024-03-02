@@ -17,9 +17,6 @@
   "lint-staged": {
     "./src/**/*.{js,jsx,ts,tsx}": [
       "npm run lint:ts:fix"
-    ],
-    "./src/**/*.{css,scss}": [
-      "npm run lint:scss:fix"
     ]
   },
   "dependencies": {

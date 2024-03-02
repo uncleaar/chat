@@ -5,7 +5,7 @@ import { IconAt, IconPassword } from "@tabler/icons-react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/shared/utils/validation";
-import { useLogInWithEmailAndPasswordMutation } from "@/shared/hooks";
+import { useRegisterWithEmailandPasswordMutation } from "@/shared/hooks/useRegisterWithEmailandPasswordMutation";
 
 export interface FormValues {
   email: string;
@@ -17,7 +17,7 @@ export const SignUpForm = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const logInWithEmailAndPassword = useLogInWithEmailAndPasswordMutation();
+  const logInWithEmailAndPassword = useRegisterWithEmailandPasswordMutation();
 
   return (
     <form
