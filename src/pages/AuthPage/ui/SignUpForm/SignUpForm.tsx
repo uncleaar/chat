@@ -6,6 +6,8 @@ import { IconAt, IconPassword } from "@tabler/icons-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/shared/utils/validation";
 import { useRegisterWithEmailandPasswordMutation } from "@/shared/hooks/useRegisterWithEmailandPasswordMutation";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/shared/utils/constants";
 
 export interface FormValues {
   email: string;
@@ -13,17 +15,24 @@ export interface FormValues {
 }
 
 export const SignUpForm = () => {
+  const navigate = useNavigate();
+
   const { handleSubmit, control } = useForm<FormValues>({
     resolver: yupResolver(loginSchema),
   });
 
-  const logInWithEmailAndPassword = useRegisterWithEmailandPasswordMutation();
+  const registerWithEmailAndPassword =
+    useRegisterWithEmailandPasswordMutation();
+
+  if (registerWithEmailAndPassword.status === "success") {
+    navigate(ROUTES.INFO);
+  }
 
   return (
     <form
       className={styles.form}
       onSubmit={handleSubmit(async ({ password, email }) =>
-        logInWithEmailAndPassword.mutate({ email, password })
+        registerWithEmailAndPassword.mutate({ email, password })
       )}
     >
       <Flex direction="column" gap="md" w="20rem">
