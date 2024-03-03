@@ -14,3 +14,13 @@ export const useLogInWithEmailAndPasswordMutation = () => {
     },
   });
 };
+
+//  .catch((error) => {
+//     if (error.code === 'auth/multi-factor-auth-required') {
+//       // Handle MFA requirement
+//       const resolver = new MultiFactorResolver(auth, error.resolver);
+//       // Show UI to complete MFA sign-in
+//     } else {
+//       // Handle other errors
+//     }
+//   });
