@@ -1,26 +1,26 @@
-// import { useEffect, useState } from "react";
-// import { auth } from "@/app/providers/firebase/firebase";
-// import { ApplicationVerifier, RecaptchaVerifier } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { auth } from "@/app/providers/firebase/firebase";
+import { ApplicationVerifier, RecaptchaVerifier } from "firebase/auth";
 
-// export function useRecaptcha(componentId: string) {
-//   const [recaptcha, setRecaptcha] = useState<ApplicationVerifier>();
+export function useRecaptcha(componentId: string) {
+  const [recaptcha, setRecaptcha] = useState<ApplicationVerifier>();
 
-//   useEffect(() => {
-//     const recaptchaVerifier = new RecaptchaVerifier(
-//       componentId,
-//       {
-//         size: "invisible",
-//         callback: () => {},
-//       },
-//       auth
-//     );
+  useEffect(() => {
+    const recaptchaVerifier = new RecaptchaVerifier(
+      componentId!,
+      {
+        size: "invisible",
+        callback: () => {},
+      },
+      auth
+    );
 
-//     setRecaptcha(recaptchaVerifier);
+    setRecaptcha(recaptchaVerifier);
 
-//     return () => {
-//       recaptchaVerifier.clear();
-//     };
-//   }, [componentId]);
+    return () => {
+      recaptchaVerifier.clear();
+    };
+  }, [componentId]);
 
-//   return recaptcha;
-// }
+  return recaptcha;
+}

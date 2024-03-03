@@ -1,2 +1,2 @@
 export * from "./AuthPage/AuthPage";
-export * from "./InfoPage/InfoPage";
+export * from "./MfaPage/MfaPage";

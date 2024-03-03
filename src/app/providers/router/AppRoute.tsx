@@ -1,7 +1,7 @@
 import { memo, ReactElement } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ROUTES } from "../../../shared/utils/constants";
-import { AuthPage, InfoPage } from "@/pages";
+import { AuthPage, MfaPage } from "@/pages";
 import { useStore } from "../store";
 
 export const AppRoute = memo((): ReactElement => {
@@ -12,7 +12,7 @@ export const AppRoute = memo((): ReactElement => {
   return (
     <Routes>
       <Route element={<AuthPage />} path={ROUTES.AUTH} />
-      <Route element={<InfoPage />} path={ROUTES.INFO} />
+      <Route element={<MfaPage />} path={ROUTES.INFO} />
     </Routes>
   );
 });

@@ -33,7 +33,7 @@ Sentry.init({
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <MantineProvider>
+      <MantineProvider defaultColorScheme="dark">
         <QueryClientProvider client={queryClient}>
           <StoreProvider>
             <App />
