@@ -17,9 +17,9 @@ export const SignInForm = () => {
   return (
     <form
       className={styles.form}
-      onSubmit={handleSubmit(async ({ password, email }) =>
-        logInWithEmailAndPassword.mutate({ email, password })
-      )}
+      onSubmit={handleSubmit(async ({ password, email }) => {
+        logInWithEmailAndPassword.mutate({ email, password });
+      })}
     >
       <Flex direction="column" gap="md" w="20rem">
         <Controller
