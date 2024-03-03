@@ -1,7 +1,23 @@
 import { auth } from "@/app/providers/firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 
 export const registerWithEmailAndPassword = async (data: {
   email: string;
   password: string;
-}) => createUserWithEmailAndPassword(auth, data.email, data.password);
+}) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    );
+    const user = userCredential.user;
+    await sendEmailVerification(user);
+    alert("Verification email sent!");
+  } catch (error) {
+    console.error(error);
+  }
+};
