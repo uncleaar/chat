@@ -16,9 +16,12 @@ export const addDocument = async <T extends WithFieldValue<DocumentData>>(
   if (id) {
     const documentRef = doc(db, collection, id);
     await setDoc(documentRef, data);
+
+    console.log(data, " data");
     return data;
   }
 
+  console.log(data, " data2");
   await addDoc(col(db, collection), data);
   return data;
 };

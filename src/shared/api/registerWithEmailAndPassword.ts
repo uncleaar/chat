@@ -17,8 +17,10 @@ export const registerWithEmailAndPassword = async (data: {
     );
 
     const user = userCredential.user;
+
+    await addDocument("users", { ...user, uid: user.uid }, user.uid);
+
     await sendEmailVerification(user);
-    await addDocument("users", user);
     alert("Verification email sent!");
   } catch (error) {
     console.error(error);
