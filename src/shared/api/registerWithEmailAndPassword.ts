@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
+import { addDocument } from "./addDocument";
 
 export const registerWithEmailAndPassword = async (data: {
   email: string;
@@ -14,8 +15,10 @@ export const registerWithEmailAndPassword = async (data: {
       data.email,
       data.password
     );
+
     const user = userCredential.user;
     await sendEmailVerification(user);
+    await addDocument("users", user);
     alert("Verification email sent!");
   } catch (error) {
     console.error(error);
