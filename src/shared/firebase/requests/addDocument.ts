@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 
 export const addDocument = async <T extends WithFieldValue<DocumentData>>(
-  collection: "users",
+  collection: string,
   data: T,
   id?: string
 ) => {

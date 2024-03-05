@@ -2,10 +2,10 @@ import { Controller, useForm } from "react-hook-form";
 import styles from "./SignInForm.module.scss";
 import { Button, Flex, Input } from "@mantine/core";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useLogInWithEmailAndPasswordMutation } from "@/shared/hooks";
 import { loginSchema } from "@/shared/utils/validation";
 import { IconAt, IconPassword } from "@tabler/icons-react";
 import { FormValues } from "../SignUpForm/SignUpForm";
+import { useLogInWithEmailAndPasswordMutation } from "@/shared/firebase/hooks";
 
 export const SignInForm = () => {
   const { handleSubmit, control } = useForm<FormValues>({

@@ -1,4 +1,4 @@
-import { OTPInput } from "@/components/OtpInput/OtpInput";
+import { OTPInput } from "@/common/OtpInput/OtpInput";
 
 import React, { useState } from "react";
 

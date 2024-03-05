@@ -7,7 +7,7 @@ export function useRecaptcha(componentId: string) {
 
   useEffect(() => {
     const recaptchaVerifier = new RecaptchaVerifier(
-      componentId!,
+      componentId,
       {
         size: "invisible",
         callback: () => {},

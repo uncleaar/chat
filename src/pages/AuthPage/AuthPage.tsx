@@ -3,7 +3,7 @@ import { SignUpForm } from "./ui/SignUpForm/SignUpForm";
 import { SignInForm } from "./ui/SignInForm/SignInForm";
 import { Button } from "@mantine/core";
 import styles from "./AuthPage.module.scss";
-import { useLoginWithGoogleMutation } from "@/shared/hooks";
+import { useLoginWithGoogleMutation } from "@/shared/firebase/hooks";
 
 export type Form = "sign-in" | "sign-up";
 

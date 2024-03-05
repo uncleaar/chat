@@ -5,7 +5,7 @@ import { IconAt, IconPassword } from "@tabler/icons-react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/shared/utils/validation";
-import { useRegisterWithEmailandPasswordMutation } from "@/shared/hooks/useRegisterWithEmailandPasswordMutation";
+import { useRegisterWithEmailandPasswordMutation } from "@/shared/firebase/hooks/useRegisterWithEmailandPasswordMutation";
 
 import { FC } from "react";
 import { Form } from "../../AuthPage";

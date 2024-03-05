@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { logInWithEmailAndPassword } from "../api";
+import { logInWithEmailAndPassword } from "../requests";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../utils/constants";
+import { ROUTES } from "../../utils/constants";
 
 export const useLogInWithEmailAndPasswordMutation = () => {
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { useGetCoins } from "@/shared/hooks/useGetCoints";
+import { useGetCoins } from "@/shared/hooks/useGetCoins";
 import React from "react";
 
 export const CoinsPage = () => {
@@ -8,5 +8,5 @@ export const CoinsPage = () => {
 
   console.log(data, "data");
 
-  return <div></div>;
+  return <div>coins</div>;
 };

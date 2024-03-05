@@ -2,9 +2,9 @@ import { IconMessage } from "@tabler/icons-react";
 import styles from "./MfaPage.module.scss";
 import { Button, Flex, Input, Text } from "@mantine/core";
 import { IMaskInput } from "react-imask";
-import { useLogoutMutation } from "@/shared/hooks";
 import { useStore } from "@/app/providers/store";
 import { INITIAL_STORE } from "@/app/providers/store/StoreContext";
+import { useLogoutMutation } from "@/shared/firebase/hooks";
 
 export const MfaPage = () => {
   const { setStore } = useStore();

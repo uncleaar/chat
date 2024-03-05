@@ -2,12 +2,12 @@ import React, { Suspense } from "react";
 import { AppRoute } from "./providers/router/AppRoute";
 
 import "./styles/globals.css";
-import { useStore } from "./providers/store";
+import { useAuthState } from "@/shared/firebase/hooks/useAuthState";
 
 export const App = () => {
-  const { id } = useStore();
+  const { data } = useAuthState();
 
-  console.log(id, "is");
+  console.log(data, "datasdasda");
   return (
     <Suspense fallback={<p>loading</p>}>
       <AppRoute />
