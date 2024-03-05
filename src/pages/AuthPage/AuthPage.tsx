@@ -5,17 +5,27 @@ import { Button } from "@mantine/core";
 import styles from "./AuthPage.module.scss";
 import { useLoginWithGoogleMutation } from "@/shared/hooks";
 
+export type Form = "sign-in" | "sign-up";
+
 export const AuthPage = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isType, setIsType] = useState<Form>("sign-in");
 
   const loginWithGoogle = useLoginWithGoogleMutation();
 
+  const toggleFormType = () => {
+    setIsType(isType === "sign-in" ? "sign-up" : "sign-in");
+  };
+
   return (
     <div className={styles.auth}>
-      {!isSignUp && <SignInForm />}
-      {isSignUp && <SignUpForm />}
-      <Button variant="text" onClick={() => setIsSignUp(!isSignUp)}>
-        {isSignUp ? "already have account" : "create new account"}
+      {isType === "sign-in" ? (
+        <SignInForm />
+      ) : (
+        <SignUpForm setIsType={setIsType} />
+      )}
+
+      <Button variant="text" onClick={toggleFormType}>
+        {isType === "sign-up" ? "already have account" : "create new account"}
       </Button>
 
       <Button

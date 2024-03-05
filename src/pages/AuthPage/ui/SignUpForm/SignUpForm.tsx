@@ -6,17 +6,20 @@ import { IconAt, IconPassword } from "@tabler/icons-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/shared/utils/validation";
 import { useRegisterWithEmailandPasswordMutation } from "@/shared/hooks/useRegisterWithEmailandPasswordMutation";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@/shared/utils/constants";
+
+import { FC } from "react";
+import { Form } from "../../AuthPage";
 
 export interface FormValues {
   email: string;
   password: string;
 }
 
-export const SignUpForm = () => {
-  const navigate = useNavigate();
+interface SignUpFormProps {
+  setIsType: (type: Form) => void;
+}
 
+export const SignUpForm: FC<SignUpFormProps> = ({ setIsType }) => {
   const { handleSubmit, control } = useForm<FormValues>({
     resolver: yupResolver(loginSchema),
   });
@@ -25,7 +28,7 @@ export const SignUpForm = () => {
     useRegisterWithEmailandPasswordMutation();
 
   if (registerWithEmailAndPassword.status === "success") {
-    navigate(ROUTES.INFO);
+    setIsType("sign-in");
   }
 
   return (
@@ -59,6 +62,7 @@ export const SignUpForm = () => {
               data-testid="password"
               onChange={onChange}
               onBlur={onBlur}
+              type="password"
               value={value}
               placeholder="Password"
               leftSection={<IconPassword />}

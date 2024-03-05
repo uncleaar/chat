@@ -44,6 +44,7 @@ export const SignInForm = () => {
             <Input
               data-testid="password"
               onChange={onChange}
+              type="password"
               onBlur={onBlur}
               value={value}
               placeholder="Password"
