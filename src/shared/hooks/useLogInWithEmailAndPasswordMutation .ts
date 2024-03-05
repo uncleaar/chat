@@ -11,7 +11,7 @@ export const useLogInWithEmailAndPasswordMutation = () => {
       return logInWithEmailAndPassword(data);
     },
     onSuccess: () => {
-      navigate(ROUTES.INFO);
+      navigate(ROUTES.COINS);
     },
   });
 };
