@@ -12,6 +12,8 @@ interface Coin {
   name: string;
   price: number;
   rank: number;
+  iconUrl: string;
+  uuid: string;
 }
 
 interface Coins {
