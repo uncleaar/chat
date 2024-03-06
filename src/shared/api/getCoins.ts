@@ -8,7 +8,7 @@ interface Stats {
   totalMarketCap: string;
 }
 
-interface Coin {
+export interface Coin {
   name: string;
   price: number;
   rank: number;
