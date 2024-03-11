@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import * as tf from "@tensorflow/tfjs";
 
@@ -7,6 +7,7 @@ import * as utilities from "./utilities";
 export const WebCam: React.FC = () => {
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isCameraRunning, setIsCameraRunning] = useState(false);
 
   const loadModel = async () => {
     const modelURL =
@@ -16,8 +17,14 @@ export const WebCam: React.FC = () => {
     const detectionSpeed = 16.7;
 
     setInterval(() => {
-      detect(net);
+      if (isCameraRunning) {
+        detect(net);
+      }
     }, detectionSpeed);
+  };
+
+  const startCamera = () => {
+    setIsCameraRunning((prev) => !prev);
   };
 
   const detect = async (net: tf.GraphModel<string | tf.io.IOHandler>) => {
@@ -42,10 +49,10 @@ export const WebCam: React.FC = () => {
         const resized = tf.image.resizeBilinear(img, [640, 480]);
         const casted = resized.cast("int32");
         const expanded = casted.expandDims(0);
-        const obj = await net.executeAsync(expanded) as tf.Tensor[];
-        const boxes = await obj[1].array() as number[][];
-        const classes = await obj[2].array() as number[][];
-        const scores = await obj[4].array() as number[][];
+        const obj = (await net.executeAsync(expanded)) as tf.Tensor[];
+        const boxes = (await obj[1].array()) as number[][];
+        const classes = (await obj[2].array()) as number[][];
+        const scores = (await obj[4].array()) as number[][];
 
         // Draw mesh
         const ctx = canvasRef.current.getContext("2d");
@@ -79,36 +86,43 @@ export const WebCam: React.FC = () => {
 
   return (
     <div>
-      <Webcam
-          ref={webcamRef}
-          muted={true} 
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zIndex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
+      <button onClick={startCamera}>{!isCameraRunning ? 'Start' : 'Stop'}</button>
 
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zIndex: 10,
-            width: 640,
-            height: 480,
-          }}
-        />
+      {isCameraRunning && (
+        <>
+          <Webcam
+            ref={webcamRef}
+            muted={true}
+            style={{
+              marginLeft: "auto",
+              position: "absolute",
+              marginRight: "auto",
+              left: 100,
+              top: 100,
+              right: 0,
+              textAlign: "center",
+              zIndex: 9,
+              width: 640,
+              height: 480,
+            }}
+          />
+
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              left: 0,
+              right: 0,
+              textAlign: "center",
+              zIndex: 8,
+              width: 640,
+              height: 480,
+            }}
+          />
+        </>
+      )}
     </div>
   );
 };
