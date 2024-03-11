@@ -1,15 +1,16 @@
 import { Avatar, Flex, ScrollArea, Table } from "@mantine/core";
 
-import styles from "./coins.module.scss";
-import { FC } from "react";
+import { FC, } from "react";
+
 import { Coin } from "@/shared/api";
+
+import styles from "./coins.module.scss";
 
 interface CoinsProps {
   coins?: Coin[];
 }
 
 export const Coins: FC<CoinsProps> = ({ coins }) => {
-  console.log(coins, "coiuns");
   const rows = coins?.map((coin) => (
     <Table.Tr key={coin.name} className={styles.coin}>
       <Table.Td p={20}>

@@ -3,6 +3,7 @@ import { useGetCoins } from "@/shared/hooks";
 
 import { Coins } from "@/shared/widgets/coins/coins";
 
+
 export const CoinsPage = () => {
   const { data, isLoading } = useGetCoins();
 

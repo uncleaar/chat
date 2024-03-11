@@ -1,6 +1,8 @@
-import { AppShell, Burger, Group, Skeleton } from "@mantine/core";
+import { ROUTES } from "@/shared/utils/constants";
+import { AppShell, Burger, Group, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -36,12 +38,8 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        Navbar
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
+       <NavLink to={ROUTES.CAMERA} component={Link} label="Web camera"/>
+       <NavLink to={ROUTES.COINS} component={Link} label="Coins"/>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
